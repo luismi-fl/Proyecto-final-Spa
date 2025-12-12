@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title> Spa de Mascotas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpS20lQMyMPwuUmyMEl4MBCDEB-KdS5wALyQ&s"
+         alt="Logo Spa Mascotas"
+         style="height:60px; margin-right:15px;">
+
+    <div class="brand">Spa-Cachuchin</div>
+
+    <nav id="main-nav" class="hidden">
+      <button data-view="registro" class="nav-btn">Registro</button>
+      <button data-view="agenda" class="nav-btn">Agenda</button>
+      <button data-view="catalogo" class="nav-btn">Catálogo</button>
+      <button id="btn-logout">Cerrar Sesión</button>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Login -->
+    <section id="view-login" class="view">
+      <h2>Iniciar sesión</h2>
+
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQY8jAc-W6uoKoyYWEto-bnzKYv9bJkgsotpA&s"
+           alt="Perrito en spa"
+           style="width:230px; border-radius:12px; display:block; margin:0 auto 20px;">
+
+      <form id="login-form" class="card">
+        <label>Usuario
+          <input id="login-user" required placeholder="usuario">
+        </label>
+        <label>Contraseña
+          <input id="login-pass" type="password" required placeholder="contraseña">
+        </label>
+        <div class="actions">
+          <button type="submit">Ingresar</button>
+        </div>
+        <p class="note">Ingresarsar <strong>admin</strong> / Contraseña: <strong>123</strong></p>
+      </form>
+    </section>
+
+    <!-- Registro del dueño y mascota-->
+    <section id="view-registro" class="view hidden">
+      <h2>Módulo de Registro — Dueños y Mascotas</h2>
+
+      <img src="https://images.unsplash.com/photo-1505628346881-b72b27e84530"
+           alt="Perrito bonito"
+           style="width:250px; border-radius:12px; display:block; margin:10px auto;">
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Registrar Dueño</h3>
+          <form id="form-dueño">
+            <label>Nombre
+              <input name="nombre" required>
+            </label>
+            <label>Teléfono
+              <input name="telefono" required pattern="[0-9+() -]{6,}">
+            </label>
+            <label>Correo
+              <input name="correo" type="email" required>
+            </label>
+            <div class="actions">
+              <button type="submit">Guardar Dueño</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Registrar Mascota</h3>
+          <form id="form-mascota">
+            <label>Nombre
+              <input name="nombre" required>
+            </label>
+            <label>Especie
+              <input name="especie" required>
+            </label>
+            <label>Raza
+              <input name="raza" required>
+            </label>
+            <label>Dueño (seleccionar)
+              <select name="duenoId" id="select-duenos" required>
+                <option value="">-- Seleccione dueño --</option>
+              </select>
+            </label>
+            <div class="actions">
+              <button type="submit">Guardar Mascota</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Listados</h3>
+        <div id="lista-duenos-mascotas">
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Agenda de citas para la mascota -->
+    <section id="view-agenda" class="view hidden">
+      <h2>Módulo de Agenda de Servicios</h2>
+
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyNajt_qCk6rsNb-TR0UtykK1YgKYMAbD_QA&s"
+           alt="Servicio de spa"
+           style="width:250px; display:block; margin:10px auto; border-radius:12px;">
+
+      <div class="card">
+        <h3>Agendar Servicio</h3>
+        <form id="form-agenda">
+          <label>Fecha
+            <input name="fecha" type="date" required>
+          </label>
+          <label>Hora
+            <input name="hora" type="time" required>
+          </label>
+          <label>Mascota
+            <select name="mascotaId" id="select-mascotas" required>
+              <option value="">-- Seleccione mascota --</option>
+            </select>
+          </label>
+          <label>Servicio
+            <select name="servicio" required>
+              <option value="Baño">Baño</option>
+              <option value="Corte de pelo">Corte de pelo</option>
+              <option value="Desparasitado">Desparasitado</option>
+              <option value="Comida">Comida</option>
+            </select>
+          </label>
+          <div class="actions">
+            <button type="submit">Agendar</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Agenda Guardada</h3>
+        <div id="lista-agenda"></div>
+      </div>
+    </section>
+
+    <!-- Catalogo y Carrito de compras -->
+    <section id="view-catalogo" class="view hidden">
+      <h2>Carrito de Compras</h2>
+
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoZEG440TA1QUY1TJDKwIPN4F2tkquM62nNQ&s"
+        alt="Productos mascotas"
+        style="width:260px; border-radius:12px; display:block; margin:10px auto;">
+
+      <div class="two-col">
+        <div class="card" style="flex:2">
+          <h3>Catálogo</h3>
+          <div id="catalogo-items" class="catalog"></div>
+        </div>
+
+        <div class="card" style="flex:1">
+          <h3>Carrito</h3>
+          <div id="cart-list"></div>
+          <div class="cart-summary">
+            <div>Subtotal: <span id="cart-subtotal">0.00</span></div>
+            <div>Total: <span id="cart-total">0.00</span></div>
+          </div>
+          <div class="actions">
+            <button id="btn-clear-cart">Vaciar carrito</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <small>Spa-Cachuchin.   Cuidado y Bienestar Animal ref:74027471 Villa Copacabana/C. Inca Sebastian Acosta</small>
+  </footer>
+
+  <script src="main.js"></script>
+
+</body>
+</html>
+
